@@ -1,7 +1,7 @@
 ﻿using PX.Data;
 using PX.Data.BQL;
 using PX.Data.BQL.Fluent;
-using PX.SM.Alias;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace MUTeam_Code
         #region Views
         //public PXFilter<MUCustFilter> Filter;
         public PXCancel<MUMetaRow> Cancel;
-        public PXSelect<CustProject,Where<CustProject.projID,IsNotNull>> Customizations;
+        public PXSelect<CustProject,Where<CustProject.projid,IsNotNull>> Customizations;
         //[PXFilterable]
         public PXProcessing<
             MUMetaRow>
@@ -32,16 +32,41 @@ namespace MUTeam_Code
         protected virtual IEnumerable jobList()
         {
             MUMetaRow newRow = new MUMetaRow();
-            var items = SelectFrom<CustProject>.Where<CustProject.projID.IsNotNull>.View.Select(this).RowCast<CustProject>().ToList();
+            var items = SelectFrom<CustProject>.Where<CustProject.projid.IsNotNull>.View.Select(this).RowCast<CustProject>().ToList();
+            items = items.Where(x => x.IsWorking==true).ToList();
             string metadata = string.Empty;
             foreach (var item in items) 
-            { 
+            {
+                metadata += item.Name + " - "+ item.Description + "; ";
                 //gather project data into string
             }
             newRow.Data = metadata;
             List<MUMetaRow> newList = new List<MUMetaRow>();
             newList.Add(newRow);
             return newList;
+        }
+        #endregion
+        #region Events
+        protected virtual void MUMetaRow_RowSelected(PXCache sender, PXRowSelectedEventArgs e)
+        {
+
+
+                JobList.SetProcessDelegate(
+                    delegate (List<MUMetaRow> list)
+                    {
+                        //Create Log Entry
+
+                        // Run Publish
+
+                        //Get Results
+
+                        //Update Log Entry
+
+                        //Send Notifications
+                    }
+                );
+            
+
         }
         #endregion
     }
