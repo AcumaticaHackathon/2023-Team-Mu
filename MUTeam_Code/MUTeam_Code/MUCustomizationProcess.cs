@@ -6,20 +6,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static MUTeam_Code.MUConstants;
+using static PX.Data.PXGenericInqGrph;
+using static PX.Objects.IN.InventoryItem;
 
 namespace MUTeam_Code
 {
     public class MUCustomizationProcess : PXGraph<MUCustomizationProcess>
     {
         #region Views
-        //public PXFilter<MUCustFilter> Filter;
+        public PXFilter<MUCustFilter> Filter;
         public PXCancel<MUMetaRow> Cancel;
         public PXSelect<CustProject, Where<CustProject.projid, IsNotNull>> Customizations;
-        //[PXFilterable]
-        public PXProcessing<
-            MUMetaRow>
+     
+        public PXFilteredProcessing<MUMetaRow, MUCustFilter> JobList;
+        //public PXProcessing<
+        //    MUMetaRow>
 
-            JobList;
+        //    JobList;
         #endregion
 
         #region Constructor
@@ -48,23 +54,28 @@ namespace MUTeam_Code
         protected virtual void MUMetaRow_RowSelected(PXCache sender, PXRowSelectedEventArgs e)
         {
 
-
-            JobList.SetProcessDelegate(
+            MUCustFilter filter = e.Row as MUCustFilter;
+            if (filter != null)
+            {
+                JobList.SetProcessDelegate(
                 delegate (List<MUMetaRow> list)
                 {
 
                     var graph = PXGraph.CreateInstance<MUCustomizationProcess>();
-                    graph.PerformAction(list);
+                    graph.PerformAction(list,filter);
 
                 }
             );
+
+            }
+            
 
 
         }
         #endregion
 
         #region Process
-        public virtual void PerformAction(List<MUMetaRow> list)
+        public virtual void PerformAction(List<MUMetaRow> list,MUCustFilter filter)
         {
             //TODO Create Log Entry
             //TODO Run Publish
@@ -82,7 +93,27 @@ namespace MUTeam_Code
         [PXCacheName("Filter")]
         public partial class MUCustFilter : IBqlTable
         {
+            #region NotificationID
 
+            public abstract class notificationID : PX.Data.IBqlField
+            {
+            }
+            protected Int32? _NotificationID;
+            [PXUIField(DisplayName ="Mailing ID")]
+            
+            [PXSelector(typeof(Search<MUSMNotification.notificationID,Where<MUSMNotification.module.IsEqual<MUModuleList.sM>>>), DescriptionField = typeof(MUSMNotification.notificationCD), CacheGlobal = true)]
+            public virtual Int32? NotificationID
+            {
+                get
+                {
+                    return this._NotificationID;
+                }
+                set
+                {
+                    this._NotificationID = value;
+                }
+            }
+            #endregion
 
         }
         [Serializable]

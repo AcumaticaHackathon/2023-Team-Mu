@@ -4,6 +4,7 @@ using PX.Objects.CR;
 using System;
 using PX.Data.BQL;
 using PX.Objects.CS;
+using PX.Objects;
 
 namespace MUTeam_Code
 {
@@ -32,7 +33,7 @@ namespace MUTeam_Code
         protected void SMNotification_Module_FieldDefaulting(PXCache cache, PXFieldDefaultingEventArgs e)
         {
             if (e.Row == null) return;
-            var row = (SMNotification)e.Row;
+            var row = (MUSMNotification)e.Row;
 
             e.NewValue = MUConstants.MUModuleList.SM;
         }
@@ -40,7 +41,7 @@ namespace MUTeam_Code
         protected void SMNotification_SourceCD_FieldDefaulting(PXCache cache, PXFieldDefaultingEventArgs e)
         {
             if (e.Row == null) return;
-            var row = (SMNotification)e.Row;
+            var row = (MUSMNotification)e.Row;
 
             e.NewValue = MUConstants.MUModuleList.SMDesc;
         }

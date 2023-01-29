@@ -5,26 +5,7 @@ VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUTeam_Code", "MUTeam_Code\MUTeam_Code.csproj", "{7981AD3F-75D9-4B2B-BF69-50128DFD7D13}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MuTeamHackathon", "http://localhost/MuTeamHackathon", "{19D49F09-D8F6-4E94-871B-1A2FA1DFC182}"
-	ProjectSection(WebsiteProperties) = preProject
-		UseIISExpress = "false"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
-		Debug.AspNetCompiler.VirtualPath = "/MuTeamHackathon"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\Acumatica\22R2\MuTeamHackathon\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\MuTeamHackathon\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/MuTeamHackathon"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\Acumatica\22R2\MuTeamHackathon\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\MuTeamHackathon\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\..\..\..\..\..\Acumatica\22R2\MuTeamHackathon\"
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APITester", "APITester\APITester.csproj", "{F71F6576-6753-4277-9801-8810FDD21639}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,10 +17,10 @@ Global
 		{7981AD3F-75D9-4B2B-BF69-50128DFD7D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7981AD3F-75D9-4B2B-BF69-50128DFD7D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7981AD3F-75D9-4B2B-BF69-50128DFD7D13}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19D49F09-D8F6-4E94-871B-1A2FA1DFC182}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19D49F09-D8F6-4E94-871B-1A2FA1DFC182}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19D49F09-D8F6-4E94-871B-1A2FA1DFC182}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{19D49F09-D8F6-4E94-871B-1A2FA1DFC182}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{F71F6576-6753-4277-9801-8810FDD21639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F71F6576-6753-4277-9801-8810FDD21639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F71F6576-6753-4277-9801-8810FDD21639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F71F6576-6753-4277-9801-8810FDD21639}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
