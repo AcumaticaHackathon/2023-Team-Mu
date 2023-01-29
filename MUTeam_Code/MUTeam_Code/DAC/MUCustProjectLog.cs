@@ -19,11 +19,11 @@ namespace MUTeam_Code
         public virtual DateTime? DatePublished { get; set; }
         public abstract class datePublished : PX.Data.BQL.BqlDateTime.Field<datePublished> { }
         #endregion
-        #region ProjectList
+        #region ProjectName
         [PXDBString(500,IsUnicode =true)]
-        public virtual string ProjectList { get; set; }
-        public abstract class projectList :
-        PX.Data.BQL.BqlString.Field<projectList>
+        public virtual string ProjectName { get; set; }
+        public abstract class projectName :
+        PX.Data.BQL.BqlString.Field<projectName>
         { }
         #endregion
         #region NotificationID
