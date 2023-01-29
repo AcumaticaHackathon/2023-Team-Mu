@@ -31,23 +31,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Flurl, Version=3.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.3.0.6\lib\net472\Flurl.dll</HintPath>
+    </Reference>
+    <Reference Include="Flurl.Http, Version=3.2.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.Http.3.2.4\lib\net472\Flurl.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Acumatica ERP\22_208\Bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PX.Common">
-      <HintPath>..\..\..\..\..\..\..\Acumatica\22R2\MuTeamHackathon\Bin\PX.Common.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Acumatica ERP\22_208\Bin\PX.Common.dll</HintPath>
     </Reference>
     <Reference Include="PX.Common.Std">
-      <HintPath>..\..\..\..\..\..\..\Acumatica\22R2\MuTeamHackathon\Bin\PX.Common.Std.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Acumatica ERP\22_208\Bin\PX.Common.Std.dll</HintPath>
     </Reference>
     <Reference Include="PX.Data">
-      <HintPath>..\..\..\..\..\..\..\Acumatica\22R2\MuTeamHackathon\Bin\PX.Data.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Acumatica ERP\22_208\Bin\PX.Data.dll</HintPath>
     </Reference>
     <Reference Include="PX.Data.BQL.Dynamic">
-      <HintPath>..\..\..\..\..\..\..\Acumatica\22R2\MuTeamHackathon\Bin\PX.Data.BQL.Dynamic.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Acumatica ERP\22_208\Bin\PX.Data.BQL.Dynamic.dll</HintPath>
     </Reference>
     <Reference Include="PX.Data.BQL.Fluent">
-      <HintPath>..\..\..\..\..\..\..\Acumatica\22R2\MuTeamHackathon\Bin\PX.Data.BQL.Fluent.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Acumatica ERP\22_208\Bin\PX.Data.BQL.Fluent.dll</HintPath>
     </Reference>
     <Reference Include="PX.Objects">
-      <HintPath>..\..\..\..\..\..\..\Acumatica\22R2\MuTeamHackathon\Bin\PX.Objects.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Acumatica ERP\22_208\Bin\PX.Objects.dll</HintPath>
     </Reference>
     <Reference Include="PX.Web.Customization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -66,6 +76,7 @@
     <Compile Include="DAC\MUCustProjectList.cs" />
     <Compile Include="DAC\CustProject.cs" />
     <Compile Include="DAC\MUConstants.cs" />
+    <Compile Include="DAC\MUCustProjectLog.cs" />
     <Compile Include="DAC\MUCustProjectNotificationRecipient.cs" />
     <Compile Include="DAC\MUNotificationSetupRecipient.cs" />
     <Compile Include="DAC\MUSMNotification.cs" />
@@ -74,7 +85,10 @@
     <Compile Include="MUCustomizationSetup.cs" />
     <Compile Include="MUProjectList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublishAPICall.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

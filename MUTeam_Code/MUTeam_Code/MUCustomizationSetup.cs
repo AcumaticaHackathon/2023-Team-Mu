@@ -28,26 +28,6 @@ namespace MUTeam_Code
 
         #endregion
 
-        #region Event Handlers
-/*
-        protected void SMNotification_Module_FieldDefaulting(PXCache cache, PXFieldDefaultingEventArgs e)
-        {
-            if (e.Row == null) return;
-            var row = (MUSMNotification)e.Row;
-
-            e.NewValue = MUConstants.MUModuleList.SM;
-        }
-
-        protected void SMNotification_SourceCD_FieldDefaulting(PXCache cache, PXFieldDefaultingEventArgs e)
-        {
-            if (e.Row == null) return;
-            var row = (MUSMNotification)e.Row;
-
-            e.NewValue = MUConstants.MUModuleList.SMDesc;
-        }
-*/
-
-        #endregion
 
     }
 }
