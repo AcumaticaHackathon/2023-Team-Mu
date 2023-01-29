@@ -49,6 +49,10 @@
     <Reference Include="PX.Objects">
       <HintPath>..\..\..\..\..\..\..\Acumatica\22R2\MuTeamHackathon\Bin\PX.Objects.dll</HintPath>
     </Reference>
+    <Reference Include="PX.Web.Customization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Acumatica ERP\22_208\Bin\PX.Web.Customization.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,13 +63,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAC\MUCustProjectList.cs" />
     <Compile Include="DAC\CustProject.cs" />
     <Compile Include="DAC\MUConstants.cs" />
+    <Compile Include="DAC\MUCustProjectNotificationRecipient.cs" />
     <Compile Include="DAC\MUNotificationSetupRecipient.cs" />
     <Compile Include="DAC\MUSMNotification.cs" />
     <Compile Include="DAC\MUSMSetup.cs" />
     <Compile Include="MUCustomizationProcess.cs" />
     <Compile Include="MUCustomizationSetup.cs" />
+    <Compile Include="MUProjectList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

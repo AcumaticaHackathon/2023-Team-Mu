@@ -1,44 +1,45 @@
 ﻿using System;
 using PX.Data;
+using PX.Data.BQL.Fluent;
 using PX.SM;
 
 namespace MUTeam_Code
 {
-    [PXCacheName("MU Setup")]
-    public class MUSMSetup : IBqlTable
+    [Serializable]
+    [PXCacheName("MUCustProjectNotificationRecipient")]
+    public class MUCustProjectNotificationRecipient : IBqlTable
     {
-        #region NotifyOnPublishFail
+        #region ProjectID
+        [PXDBGuid(IsKey = true)]
+        [PXDBDefault(typeof(MUCustProject.projid))]
+        [PXParent(typeof(SelectFrom<MUCustProject>.
+             Where<MUCustProject.projid.
+             IsEqual<MUCustProjectNotificationRecipient.projectID.FromCurrent>>))]
+        public virtual Guid? ProjectID { get; set; }
+        public abstract class projectID : PX.Data.BQL.BqlGuid.Field<projectID> { }
+        #endregion
+
+        #region EMail
+        [PXDBWeblink]
+        [PXUIField(DisplayName = "Email")]
+        public virtual string EMail { get; set; }
+        public abstract class eMail : PX.Data.BQL.BqlString.Field<eMail> { }
+        #endregion
+
+        #region NotifyOnSuccess
         [PXDBBool()]
         [PXDefault(true, PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Notify On Publish Fail")]
-        public virtual bool? NotifyOnPublishFail { get; set; }
-        public abstract class notifyOnPublishFail : PX.Data.BQL.BqlBool.Field<notifyOnPublishFail> { }
+        [PXUIField(DisplayName = "Notify On Success")]
+        public virtual bool? NotifyOnSuccess { get; set; }
+        public abstract class notifyOnSuccess : PX.Data.BQL.BqlBool.Field<notifyOnSuccess> { }
         #endregion
 
-        #region NotifyOnPublishSuccess
+        #region NotifyOnFail
         [PXDBBool()]
         [PXDefault(true, PersistingCheck = PXPersistingCheck.Nothing)]
-        [PXUIField(DisplayName = "Notify On Publish Success")]
-        public virtual bool? NotifyOnPublishSuccess { get; set; }
-        public abstract class notifyOnPublishSuccess : PX.Data.BQL.BqlBool.Field<notifyOnPublishSuccess> { }
-        #endregion
-
-        #region SuccessNotificationID
-        [PXDBInt]
-        [PXSelector(typeof(Search<Notification.notificationID>),
-            SubstituteKey = typeof(Notification.name))]
-        [PXUIField(DisplayName = "Success Email Template")]
-        public virtual int? SuccessNotificationID { get; set; }
-        public abstract class successNotificationID : PX.Data.BQL.BqlInt.Field<successNotificationID> { }
-        #endregion
-
-        #region FailNotificationID
-        [PXDBInt]
-        [PXSelector(typeof(Search<Notification.notificationID>),
-            SubstituteKey = typeof(Notification.name))]
-        [PXUIField(DisplayName = "Failure Email Template")]
-        public virtual int? FailNotificationID { get; set; }
-        public abstract class failNotificationID : PX.Data.BQL.BqlInt.Field<failNotificationID> { }
+        [PXUIField(DisplayName = "Notify On Fail")]
+        public virtual bool? NotifyOnFail { get; set; }
+        public abstract class notifyOnFail : PX.Data.BQL.BqlBool.Field<notifyOnFail> { }
         #endregion
 
         #region CreatedByID
