@@ -37,7 +37,7 @@ namespace MUTeam_Code
             string metadata = string.Empty;
             foreach (var item in items)
             {
-                metadata += item.Name + " - " + item.Description + "; ";
+                metadata += item.Name + " - " + item.Description + " - " + item.Level +  " | ";
                 //gather project data into string
             }
             newRow.Data = metadata;
@@ -95,7 +95,7 @@ namespace MUTeam_Code
             public abstract class bqlField : BqlString.Field<bqlField> { }
 
             [PXString(500, IsUnicode = true)]
-            [PXUIField(DisplayName = "Job")]
+            [PXUIField(DisplayName = "Customizations that will Publish")]
             public virtual string Data
             {
                 get;
