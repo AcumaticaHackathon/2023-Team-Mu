@@ -10,7 +10,7 @@ namespace MUTeam_Code
     public class MUCustProjectLog: IBqlTable
     {
         #region ExecutionKey
-        [PXDBIdentity]
+        [PXDBIdentity(IsKey =true)]
         public virtual int? ExecutionKey { get; set; }
         public abstract class executionKey : PX.Data.BQL.BqlInt.Field<executionKey> { }
         #endregion
@@ -32,7 +32,7 @@ namespace MUTeam_Code
         public abstract class notificationID : PX.Data.BQL.BqlInt.Field<notificationID> { }
         #endregion
         #region ErrorMessage
-        [PXDBString()]
+        [PXDBString(-1)]
         public virtual string ErrorMessage { get; set; }
         public abstract class errorMessage :
        PX.Data.BQL.BqlString.Field<errorMessage>

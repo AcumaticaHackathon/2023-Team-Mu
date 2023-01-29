@@ -19,13 +19,11 @@ namespace MUTeam_Code
         #region Views
         public PXFilter<MUCustFilter> Filter;
         public PXCancel<MUMetaRow> Cancel;
+
+        public PXFilteredProcessing<MUMetaRow, MUCustFilter> JobList;
         public PXSelect<CustProject, Where<CustProject.projid, IsNotNull>> Customizations;
         public PXSelect<MUCustProjectLog> LogBook;
-        public PXFilteredProcessing<MUMetaRow, MUCustFilter> JobList;
-        //public PXProcessing<
-        //    MUMetaRow>
 
-        //    JobList;
         #endregion
 
         #region Constructor
@@ -34,6 +32,8 @@ namespace MUTeam_Code
             JobList.SetProcessAllEnabled(true);
             JobList.SetProcessVisible(false);
             JobList.SetProcessAllCaption("Publish!");
+            
+            
         }
         #endregion
 
@@ -46,10 +46,13 @@ namespace MUTeam_Code
             string metadata = string.Empty;
             foreach (var item in items)
             {
-                metadata += item.Name + " - " + item.Description + " - " + item.Level +  " | ";
+                metadata += item.Name + " - " + item.Description + " - " + item.Level + " | ";
                 //gather project data into string
             }
+            
             newRow.Data = metadata;
+            JobList.Insert(newRow);
+            JobList.Cache.SetStatus(newRow, PXEntryStatus.Held);
             //List<MUMetaRow> newList = new List<MUMetaRow>();
             //newList.Add(newRow);
             yield return newRow;
@@ -83,29 +86,41 @@ namespace MUTeam_Code
         public virtual void PerformAction(List<MUMetaRow> list,MUCustFilter filter)
         {
             //TODO Create Log Entry
-            MUCustProjectLog LogEntry = new MUCustProjectLog();
-            LogEntry.DatePublished = DateTime.Now;
-            LogEntry.ProjectName = list.FirstOrDefault().Data;
-            LogEntry.NotificationID = filter.NotificationID;
-            LogEntry = LogBook.Insert(LogEntry);
             
+            //LogEntry.ProjectName = list.FirstOrDefault().Data;
+            //LogEntry.NotificationID = filter.NotificationID;
+            
+            string projectnames;
             //TODO Run Publish and get results
             PublishAPICall WebCall = new PublishAPICall();
-            var task = WebCall.PublishPackage("https://hackathon.acumatica.com/Mu/", "admin", "123", new[] { "eSignature" });
+            var task = WebCall.PublishPackage("https://hackathon.acumatica.com/Mu/", "admin", "123", new[] { "ItsABomb", "MuCustom" });
             List<PublishResults> Results = task.Result;
             string condensedMessage = "";
             foreach (var item in Results)
             {
-                condensedMessage += item.PackageName +" - ";
+                MUCustProjectLog LogEntry = new MUCustProjectLog();
+                
+                LogEntry.DatePublished = DateTime.Now;
+                LogEntry.ProjectName = item.PackageName;
+                LogEntry.NotificationID = 1;//filter.NotificationID;
+                
+                condensedMessage = "";
                 foreach (var log in item.Log) 
                 {
-                    condensedMessage += log.message;
+                    condensedMessage += log.message + "/r/n";
                 }
+                LogEntry.ErrorMessage = condensedMessage;
+                LogEntry = LogBook.Insert(LogEntry);
+                
+                Actions.PressSave();
             }
             //TODO Update Log Entry
-            LogEntry.ErrorMessage = condensedMessage;
-            LogBook.Update(LogEntry);
-
+            if (Results.Where(x => x.isException == true).Count() > 0)
+                PXProcessing<MUMetaRow>.SetError(0, "Errors encountered!");
+            else
+                PXProcessing<MUMetaRow>.SetInfo(0, "Publication was successful!");
+           
+            
 
             //TODO  Send Notifications
         }
@@ -143,6 +158,14 @@ namespace MUTeam_Code
         [PXCacheName("MetaObject")]
         public partial class MUMetaRow : IBqlTable
         {
+
+            #region Selected
+            [PXBool]
+            [PXUIField(DisplayName = "Selected",Visible =false)]
+            public virtual bool? Selected { get; set; }
+            public abstract class selected : PX.Data.IBqlField { }
+            #endregion
+
             #region Data
             public abstract class bqlField : BqlString.Field<bqlField> { }
 
