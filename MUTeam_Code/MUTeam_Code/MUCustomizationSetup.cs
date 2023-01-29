@@ -15,9 +15,9 @@ namespace MUTeam_Code
 
     public SelectFrom<MUSMSetup>.View SMSetup;
 
-    public CRNotificationSetupList<MUSMNotification> Notifications;
-    public PXSelect<MUNotificationSetupRecipient,
-        Where<MUNotificationSetupRecipient.setupID, Equal<Current<MUSMNotification.setupID>>>> Recipients;
+    public PXSelectReadonly<MUCustProject> ProjectList;
+    public PXSelect<MUCustProjectNotificationRecipient,
+        Where<MUCustProjectNotificationRecipient.projectID, Equal<Current<MUCustProject.projid>>>> RecipientList;
 
     #endregion
 
@@ -29,7 +29,7 @@ namespace MUTeam_Code
         #endregion
 
         #region Event Handlers
-
+/*
         protected void SMNotification_Module_FieldDefaulting(PXCache cache, PXFieldDefaultingEventArgs e)
         {
             if (e.Row == null) return;
@@ -45,7 +45,7 @@ namespace MUTeam_Code
 
             e.NewValue = MUConstants.MUModuleList.SMDesc;
         }
-
+*/
 
         #endregion
 

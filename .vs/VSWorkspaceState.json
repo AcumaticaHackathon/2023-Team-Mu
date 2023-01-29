@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\MUTeam_Code",
+    "\\MUTeam_Code\\MUTeam_Code"
   ],
-  "SelectedNode": "\\MUTeam_Code.sln",
+  "SelectedNode": "\\MUTeam_Code\\MUTeam_Code.sln",
   "PreviewInSolutionExplorer": false
 }
