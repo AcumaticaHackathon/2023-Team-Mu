@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 namespace MUTeam_Code
 
 {
-
-
     [Serializable]
     [PXCacheName("CustProject")]
     public class CustProject : IBqlTable
