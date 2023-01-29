@@ -20,7 +20,7 @@ namespace MUTeam_Code
         public PXFilter<MUCustFilter> Filter;
         public PXCancel<MUMetaRow> Cancel;
         public PXSelect<CustProject, Where<CustProject.projid, IsNotNull>> Customizations;
-     
+        public PXSelect<MUCustProjectLog> LogBook;
         public PXFilteredProcessing<MUMetaRow, MUCustFilter> JobList;
         //public PXProcessing<
         //    MUMetaRow>
@@ -29,7 +29,12 @@ namespace MUTeam_Code
         #endregion
 
         #region Constructor
-        public MUCustomizationProcess() { }
+        public MUCustomizationProcess() 
+        {
+            JobList.SetProcessAllEnabled(true);
+            JobList.SetProcessVisible(false);
+            JobList.SetProcessAllCaption("Publish!");
+        }
         #endregion
 
         #region Delegate
@@ -45,9 +50,9 @@ namespace MUTeam_Code
                 //gather project data into string
             }
             newRow.Data = metadata;
-            List<MUMetaRow> newList = new List<MUMetaRow>();
-            newList.Add(newRow);
-            return newList;
+            //List<MUMetaRow> newList = new List<MUMetaRow>();
+            //newList.Add(newRow);
+            yield return newRow;
         }
         #endregion
         #region Events
@@ -55,8 +60,8 @@ namespace MUTeam_Code
         {
 
             MUCustFilter filter = e.Row as MUCustFilter;
-            if (filter != null)
-            {
+            //if (filter == null)
+            //{
                 JobList.SetProcessDelegate(
                 delegate (List<MUMetaRow> list)
                 {
@@ -67,7 +72,7 @@ namespace MUTeam_Code
                 }
             );
 
-            }
+            //}
             
 
 
@@ -78,11 +83,29 @@ namespace MUTeam_Code
         public virtual void PerformAction(List<MUMetaRow> list,MUCustFilter filter)
         {
             //TODO Create Log Entry
-            //TODO Run Publish
-
-            //TODO Get Results of publication
-
+            MUCustProjectLog LogEntry = new MUCustProjectLog();
+            LogEntry.DatePublished = DateTime.Now;
+            LogEntry.ProjectName = list.FirstOrDefault().Data;
+            LogEntry.NotificationID = filter.NotificationID;
+            LogEntry = LogBook.Insert(LogEntry);
+            
+            //TODO Run Publish and get results
+            PublishAPICall WebCall = new PublishAPICall();
+            var task = WebCall.PublishPackage("https://hackathon.acumatica.com/Mu/", "admin", "123", new[] { "eSignature" });
+            List<PublishResults> Results = task.Result;
+            string condensedMessage = "";
+            foreach (var item in Results)
+            {
+                condensedMessage += item.PackageName +" - ";
+                foreach (var log in item.Log) 
+                {
+                    condensedMessage += log.message;
+                }
+            }
             //TODO Update Log Entry
+            LogEntry.ErrorMessage = condensedMessage;
+            LogBook.Update(LogEntry);
+
 
             //TODO  Send Notifications
         }

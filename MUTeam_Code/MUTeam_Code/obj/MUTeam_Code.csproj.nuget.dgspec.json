@@ -1,0 +1,68 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\pchen\\Source\\Repos\\2023-Team-Mu\\MUTeam_Code\\MUTeam_Code\\MUTeam_Code.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\pchen\\Source\\Repos\\2023-Team-Mu\\MUTeam_Code\\MUTeam_Code\\MUTeam_Code.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\pchen\\Source\\Repos\\2023-Team-Mu\\MUTeam_Code\\MUTeam_Code\\MUTeam_Code.csproj",
+        "projectName": "MUTeam_Code",
+        "projectPath": "C:\\Users\\pchen\\Source\\Repos\\2023-Team-Mu\\MUTeam_Code\\MUTeam_Code\\MUTeam_Code.csproj",
+        "packagesPath": "C:\\Users\\pchen\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pchen\\Source\\Repos\\2023-Team-Mu\\MUTeam_Code\\MUTeam_Code\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "C:\\Users\\pchen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\SPS\\Acu_Testing\\SDKLibrary\\TestSDK_21_201_0086_87\\packages": {},
+          "C:\\SPS\\Acu_Testing\\SDKLibrary\\TestSDK_22_200_0104_105\\packages": {},
+          "C:\\SPS\\Repository\\TestSDK\\2022R1\\packages": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "dependencies": {
+            "Flurl": {
+              "target": "Package",
+              "version": "[3.0.6, )"
+            },
+            "Flurl.Http": {
+              "target": "Package",
+              "version": "[3.2.4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.2, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

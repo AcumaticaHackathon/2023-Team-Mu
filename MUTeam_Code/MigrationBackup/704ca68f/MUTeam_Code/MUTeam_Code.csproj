@@ -61,25 +61,13 @@
   <ItemGroup>
     <Compile Include="DAC\CustProject.cs" />
     <Compile Include="DAC\MUConstants.cs" />
-    <Compile Include="DAC\MUCustProjectLog.cs" />
     <Compile Include="DAC\MUNotificationSetupRecipient.cs" />
     <Compile Include="DAC\MUSMNotification.cs" />
     <Compile Include="DAC\MUSMSetup.cs" />
     <Compile Include="MUCustomizationProcess.cs" />
     <Compile Include="MUCustomizationSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PublishAPICall.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Flurl">
-      <Version>3.0.6</Version>
-    </PackageReference>
-    <PackageReference Include="Flurl.Http">
-      <Version>3.2.4</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.2</Version>
-    </PackageReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,9 +9,9 @@ using Newtonsoft.Json.Linq;
 
 namespace MUTeam_Code
 {
-    public static class PublishAPICall
+    public  class PublishAPICall
     {
-        public static async Task<List<PublishResults>> PublishPackage(string domain, string apiUser, string apiPassword, string[] packages)
+        public  async Task<List<PublishResults>> PublishPackage(string domain, string apiUser, string apiPassword, string[] packages)
         {
             List<PublishResults> results = new List<PublishResults>();
 
@@ -87,16 +87,15 @@ namespace MUTeam_Code
     }
     public class EndJSON
     {
-        
-   public  bool isCompleted { get; set; }
-    public bool isFailed { get; set; }
-    public List<logItem> log { get; set;  }
-        }
-        public class logItem
-        {
-            public string logType { get; set; }
-            public string message { get; set; }
-            public DateTime timestamp { get; set; }
-        }
+        public  bool isCompleted { get; set; }
+        public bool isFailed { get; set; }
+        public List<logItem> log { get; set;  }
+    }
+    public class logItem
+    {
+        public string logType { get; set; }
+        public string message { get; set; }
+        public DateTime timestamp { get; set; }
+    }
 
 }
