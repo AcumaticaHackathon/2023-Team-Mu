@@ -16,7 +16,7 @@ namespace MUTeam_Code
         #region Views
         //public PXFilter<MUCustFilter> Filter;
         public PXCancel<MUMetaRow> Cancel;
-        public PXSelect<CustProject,Where<CustProject.projid,IsNotNull>> Customizations;
+        public PXSelect<CustProject, Where<CustProject.projid, IsNotNull>> Customizations;
         //[PXFilterable]
         public PXProcessing<
             MUMetaRow>
@@ -33,11 +33,11 @@ namespace MUTeam_Code
         {
             MUMetaRow newRow = new MUMetaRow();
             var items = SelectFrom<CustProject>.Where<CustProject.projid.IsNotNull>.View.Select(this).RowCast<CustProject>().ToList();
-            items = items.Where(x => x.IsWorking==true).ToList();
+            items = items.Where(x => x.IsWorking == true).ToList();
             string metadata = string.Empty;
-            foreach (var item in items) 
+            foreach (var item in items)
             {
-                metadata += item.Name + " - "+ item.Description + "; ";
+                metadata += item.Name + " - " + item.Description + "; ";
                 //gather project data into string
             }
             newRow.Data = metadata;
@@ -51,51 +51,60 @@ namespace MUTeam_Code
         {
 
 
-                JobList.SetProcessDelegate(
-                    delegate (List<MUMetaRow> list)
-                    {
-                        //Create Log Entry
+            JobList.SetProcessDelegate(
+                delegate (List<MUMetaRow> list)
+                {
 
-                        // Run Publish
+                    var graph = PXGraph.CreateInstance<MUCustomizationProcess>();
+                    graph.PerformAction(list);
 
-                        //Get Results
+                }
+            );
 
-                        //Update Log Entry
-
-                        //Send Notifications
-                    }
-                );
-            
 
         }
         #endregion
-    }
 
-    #region fILTER Objects
-    [Serializable]
-    [PXCacheName("Filter")]
-    public partial class MUCustFilter : IBqlTable
-    {
-
-
-    }
-    [Serializable]
-    [PXCacheName("MetaObject")]
-    public partial class MUMetaRow : IBqlTable
-    {
-        #region Data
-        public abstract class bqlField : BqlString.Field<bqlField> { }
-
-        [PXString(500, IsUnicode = true)]
-        [PXUIField(DisplayName = "Job")]
-        public virtual string Data
+        #region Process
+        public virtual void PerformAction(List<MUMetaRow> list)
         {
-            get;
-            set;
+            //TODO Create Log Entry
+            //TODO Run Publish
+
+            //TODO Get Results of publication
+
+            //TODO Update Log Entry
+
+            //TODO  Send Notifications
         }
         #endregion
 
+        #region fILTER Objects
+        [Serializable]
+        [PXCacheName("Filter")]
+        public partial class MUCustFilter : IBqlTable
+        {
+
+
+        }
+        [Serializable]
+        [PXCacheName("MetaObject")]
+        public partial class MUMetaRow : IBqlTable
+        {
+            #region Data
+            public abstract class bqlField : BqlString.Field<bqlField> { }
+
+            [PXString(500, IsUnicode = true)]
+            [PXUIField(DisplayName = "Job")]
+            public virtual string Data
+            {
+                get;
+                set;
+            }
+            #endregion
+
+        }
+
+        #endregion
     }
-    
-    #endregion
 }

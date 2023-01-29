@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DAC\CustProject.cs" />
+    <Compile Include="DAC\MUCustProjectLog.cs" />
     <Compile Include="MUCustomizationProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
