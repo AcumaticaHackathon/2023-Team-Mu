@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Flurl.Http;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
 namespace MUTeam_Code
 {
-    public  class PublishAPICall
+    public class PublishAPICall
     {
-        public  async Task<List<PublishResults>> PublishPackage(string domain, string apiUser, string apiPassword, string[] packages)
+        public async Task<List<PublishResults>> PublishPackage(string domain, string apiUser, string apiPassword, string[] packages)
         {
             List<PublishResults> results = new List<PublishResults>();
 
@@ -35,21 +33,24 @@ namespace MUTeam_Code
                 try
                 {
                     string pubURL = domain + "CustomizationApi/publishBegin";
-                    var pubRespStr = await pubURL
+                    var beginResp = await pubURL
                         .WithCookie(session.Name, session.Value)
                         .WithCookie(auth.Name, auth.Value)
                         .WithHeader("Content-Type", "application/json")
+                        .AllowHttpStatus("400-404,500")
                         .PostJsonAsync(new
                         {
                             isMergeWithExistingPackages = true,
                             isOnlyValidation = false,
                             isOnlyDbUpdates = false,
                             isReplayPreviouslyExecutedScripts = false,
-                            projectNames = new[] { package }
-                        }).ReceiveString();
-                } catch(FlurlHttpException flurlEx)
+                            projectNames = new[] { package },
+                            tenantMode = "Current"
+
+                        });
+                }
+                catch (Exception flurlEx)
                 {
-                    
                     results.Add(new PublishResults() { PackageName = package, isException = true, Exception = flurlEx });
                     continue;
                 }
@@ -59,16 +60,29 @@ namespace MUTeam_Code
                 EndJSON end = null;
                 while (!complete)
                 {
-                    //End Call
-                    string endURL = domain + "CustomizationApi/publishEnd";
-                    var endRespStr = await endURL
-                        .WithCookie(session.Name, session.Value)
-                        .WithCookie(auth.Name, auth.Value)
-                        .WithHeader("Content-Type", "application/json")
-                        .PostJsonAsync(new { }).ReceiveString();
-                    end = JsonConvert.DeserializeObject<EndJSON>(endRespStr);
-                    //Complete
-                    complete = end.isCompleted;
+                    try
+                    {
+                        //End Call
+                        string endURL = domain + "CustomizationApi/publishEnd";
+                        var endResp = await endURL
+                            .WithCookie(session.Name, session.Value)
+                            .WithCookie(auth.Name, auth.Value)
+                            .WithHeader("Content-Type", "application/json")
+                            .AllowHttpStatus("400-404,500")
+                            .PostJsonAsync(new { });
+                        string endRespStr = await endResp.GetStringAsync();
+
+                        end = JsonConvert.DeserializeObject<EndJSON>(endRespStr);
+                        //Complete
+                        complete = end.isCompleted;
+                    }
+                    catch (Exception ex)
+                    {
+                        results.Add(new PublishResults() { PackageName = package, isException = true, Exception = ex });
+                        complete = true;
+                        continue;
+                    }
+                    await Task.Delay(1000);
                 }
                 //Publish Complete
                 results.Add(new PublishResults() { isFailed = end.isFailed, Log = end.log, PackageName = package });
@@ -87,9 +101,9 @@ namespace MUTeam_Code
     }
     public class EndJSON
     {
-        public  bool isCompleted { get; set; }
+        public bool isCompleted { get; set; }
         public bool isFailed { get; set; }
-        public List<logItem> log { get; set;  }
+        public List<logItem> log { get; set; }
     }
     public class logItem
     {
