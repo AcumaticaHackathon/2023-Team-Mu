@@ -6,18 +6,13 @@ AutoMatica is an all in one Cusotmization Package manager.
 No longer do Admin's have to wait until 2 am to publish a customization project. No longer do ISV's need to tirelessly track the customization version their customers run. 
 
 AutoMatica
-[insert screenshot here]
 
 
 
 Admin's can schedule the publish of customization packages. At the scheduled time if a publish encounters any difficulty, the assigned admin will receive email notication with all the trace log error report. 
 
-[insert screenshot here]
 
 
-[insert outline]
-
-[link to presentation]
 
 Benefits:
 Automation of Acumatica's Customization Manager, allowing for scheduling of upgrades and notifications during non-office hours.
