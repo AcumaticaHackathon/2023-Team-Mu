@@ -23,13 +23,13 @@ namespace MUTeam_Code
         #endregion
 
         #region Constructor
-        public MUCustomizationProcess()
+        public MUCustomizationProcess() 
         {
             JobList.SetProcessAllEnabled(true);
             JobList.SetProcessVisible(false);
             JobList.SetProcessAllCaption("Publish!");
-
-
+            
+            
         }
         #endregion
 
@@ -45,7 +45,7 @@ namespace MUTeam_Code
                 metadata += item.Name + " - " + item.Description + " - " + item.Level + " | ";
                 //gather project data into string
             }
-
+            
             newRow.Data = metadata;
             JobList.Insert(newRow);
             JobList.Cache.SetStatus(newRow, PXEntryStatus.Held);
@@ -61,9 +61,9 @@ namespace MUTeam_Code
             MUCustFilter filter = e.Row as MUCustFilter;
             //if (filter == null)
             //{
-            JobList.SetProcessDelegate(
-            delegate (List<MUMetaRow> list)
-            {
+                JobList.SetProcessDelegate(
+                delegate (List<MUMetaRow> list)
+                {
 
                 var graph = PXGraph.CreateInstance<MUCustomizationProcess>();
                 graph.PerformAction(list, filter);
@@ -72,7 +72,7 @@ namespace MUTeam_Code
         );
 
             //}
-
+            
 
 
         }
@@ -82,10 +82,10 @@ namespace MUTeam_Code
         public virtual void PerformAction(List<MUMetaRow> list, MUCustFilter filter)
         {
             //TODO Create Log Entry
-
+            
             //LogEntry.ProjectName = list.FirstOrDefault().Data;
             //LogEntry.NotificationID = filter.NotificationID;
-
+            
             string projectnames;
             //TODO Run Publish and get results
             PublishAPICall WebCall = new PublishAPICall();
@@ -95,19 +95,19 @@ namespace MUTeam_Code
             foreach (var item in Results)
             {
                 MUCustProjectLog LogEntry = new MUCustProjectLog();
-
+                
                 LogEntry.DatePublished = DateTime.Now;
                 LogEntry.ProjectName = item.PackageName;
                 LogEntry.NotificationID = 1;//filter.NotificationID;
-
+                
                 condensedMessage = "";
-                foreach (var log in item.Log)
+                foreach (var log in item.Log) 
                 {
                     condensedMessage += log.message + "/r/n";
                 }
                 LogEntry.ErrorMessage = condensedMessage;
                 LogEntry = LogBook.Insert(LogEntry);
-
+                
                 Actions.PressSave();
             }
             //TODO Update Log Entry
@@ -115,8 +115,8 @@ namespace MUTeam_Code
                 PXProcessing<MUMetaRow>.SetError(0, "Errors encountered!");
             else
                 PXProcessing<MUMetaRow>.SetInfo(0, "Publication was successful!");
-
-
+           
+            
 
             //TODO  Send Notifications
         }
@@ -157,7 +157,7 @@ namespace MUTeam_Code
 
             #region Selected
             [PXBool]
-            [PXUIField(DisplayName = "Selected", Visible = false)]
+            [PXUIField(DisplayName = "Selected",Visible =false)]
             public virtual bool? Selected { get; set; }
             public abstract class selected : PX.Data.IBqlField { }
             #endregion

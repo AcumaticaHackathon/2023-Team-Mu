@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "6+ghU3bLZy6NEQ16hJBlsUwtAktwo7N2PE29n30zoCg7ydjwLdwFSX6aSbll85WVqq4yoOWOLtswMHyzLE9fMw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\pchen\\Source\\Repos\\2023-Team-Mu\\MUTeam_Code\\MUTeam_Code\\MUTeam_Code.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\pchen\\.nuget\\packages\\flurl\\3.0.6\\flurl.3.0.6.nupkg.sha512",
+    "C:\\Users\\pchen\\.nuget\\packages\\flurl.http\\3.2.4\\flurl.http.3.2.4.nupkg.sha512",
+    "C:\\Users\\pchen\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
